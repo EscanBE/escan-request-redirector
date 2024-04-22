@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/EscanBE/go-app-name/constants"
+	"github.com/EscanBE/escan-request-redirector/constants"
 	libutils "github.com/EscanBE/go-lib/utils"
 	"os"
 	"path"

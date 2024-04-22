@@ -6,9 +6,9 @@ BUILD_DATE	:= $(shell date '+%Y-%m-%d')
 ###                                Build flags                              ###
 ###############################################################################
 
-LD_FLAGS = -X github.com/EscanBE/go-app-name/constants.VERSION=$(GIT_TAG) \
-            -X github.com/EscanBE/go-app-name/constants.COMMIT_HASH=$(COMMIT) \
-            -X github.com/EscanBE/go-app-name/constants.BUILD_DATE=$(BUILD_DATE)
+LD_FLAGS = -X github.com/EscanBE/escan-request-redirector/constants.VERSION=$(GIT_TAG) \
+            -X github.com/EscanBE/escan-request-redirector/constants.COMMIT_HASH=$(COMMIT) \
+            -X github.com/EscanBE/escan-request-redirector/constants.BUILD_DATE=$(BUILD_DATE)
 
 BUILD_FLAGS := -ldflags '$(LD_FLAGS)'
 
@@ -26,17 +26,10 @@ test: go.sum
 ###############################################################################
 
 build: go.sum
-ifeq ($(OS),Windows_NT)
-	@echo "building goappnamed binary..."
+	@echo "building Escan Request Redirect binary..."
 	@echo "Flags $(BUILD_FLAGS)"
-	@go build -mod=readonly $(BUILD_FLAGS) -o build/goappnamed.exe ./cmd/goappnamed
+	@go build -mod=readonly $(BUILD_FLAGS) -o build/esrrd ./cmd/esrrd
 	@echo "Builded successfully"
-else
-	@echo "building goappnamed binary..."
-	@echo "Flags $(BUILD_FLAGS)"
-	@go build -mod=readonly $(BUILD_FLAGS) -o build/goappnamed ./cmd/goappnamed
-	@echo "Builded successfully"
-endif
 .PHONY: build
 
 ###############################################################################
@@ -44,8 +37,8 @@ endif
 ###############################################################################
 
 install: go.sum
-	@echo "installing goappnamed binary..."
+	@echo "Installing Escan Request Redirect binary..."
 	@echo "Flags $(BUILD_FLAGS)"
-	@go install -mod=readonly $(BUILD_FLAGS) ./cmd/goappnamed
+	@go install -mod=readonly $(BUILD_FLAGS) ./cmd/esrrd
 	@echo "Installed successfully"
 .PHONY: install
