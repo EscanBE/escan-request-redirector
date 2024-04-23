@@ -5,7 +5,7 @@ package constants
 //goland:noinspection GoSnakeCaseUsage
 const (
 	APP_NAME    = "Escan Request Redirector"
-	APP_DESC    = "Handling redirection when shutting down Escan on customer chains"
+	APP_DESC    = "Handling redirection when Escan is not available"
 	BINARY_NAME = "esrrd"
 )
 
