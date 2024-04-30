@@ -76,6 +76,23 @@ var startCmd = &cobra.Command{
 			addr := strings.TrimPrefix(r.URL.Path, "/token/")
 			handleFuncAddress(addr, w, r)
 		})
+		http.HandleFunc("/validators/", func(w http.ResponseWriter, r *http.Request) {
+			addr := strings.TrimPrefix(r.URL.Path, "/validators/")
+			if !isSafeUrlPath(addr) {
+				http.Error(w, "Bad URL", http.StatusBadRequest)
+				return
+			}
+			var url string
+			switch engine {
+			case constants.EngineMintscan:
+				url = targetBlockExplorer + "/validators/" + addr
+			case constants.EngineSilkNodes:
+				url = targetBlockExplorer + "/account/" + addr
+			default:
+				url = targetBlockExplorer + "/address/" + addr
+			}
+			w.Write(buildRedirectContent(url, redirectMessage, redirectTimeout))
+		})
 		handleFuncDirectForward := func(w http.ResponseWriter, r *http.Request) {
 			w.Write(buildRedirectContent(targetBlockExplorer+"/"+r.URL.Path, redirectMessage, redirectTimeout))
 		}
