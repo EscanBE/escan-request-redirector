@@ -150,6 +150,7 @@ func buildRedirectContent(url, messageContent string, timeout time.Duration) []b
 	<body style="background-color: black; color: white;">
 		<h3>%s</h3>
 		<p><i>Redirecting in few seconds...</i></p>
+		<p>If you are not redirected automatically, <a href="%s" style="color: cyan;">click here</a></p>
 	</body>
-</html>`, url, timeout.Milliseconds(), messageContent))
+</html>`, url, timeout.Milliseconds(), messageContent, url))
 }
