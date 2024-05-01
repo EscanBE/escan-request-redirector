@@ -52,6 +52,14 @@ var startCmd = &cobra.Command{
 			}
 			w.Write(buildRedirectContent(targetBlockExplorer+"/tx/"+hash, redirectMessage, redirectTimeout))
 		})
+		http.HandleFunc("/block/", func(w http.ResponseWriter, r *http.Request) {
+			hash := strings.TrimPrefix(r.URL.Path, "/block/")
+			if !isSafeUrlPath(hash) {
+				http.Error(w, "Bad URL", http.StatusBadRequest)
+				return
+			}
+			w.Write(buildRedirectContent(targetBlockExplorer+"/block/"+hash, redirectMessage, redirectTimeout))
+		})
 		handleFuncAddress := func(addr string, w http.ResponseWriter, r *http.Request) {
 			if !isSafeUrlPath(addr) {
 				http.Error(w, "Bad URL", http.StatusBadRequest)
